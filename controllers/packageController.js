@@ -34,11 +34,12 @@ exports.editPackage = async (req, res) => {
             return res.status(404).json({ error: 'Pacote de viagem não encontrado' });
         }
 
-        res.render('package/edit', { package });
+        res.render('edit', { package }); // Renderize a página de edição (crie a visualização 'edit.ejs')
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 exports.updatePackage = async (req, res) => {
     try {
@@ -52,11 +53,13 @@ exports.updatePackage = async (req, res) => {
             return res.status(404).json({ error: 'Pacote de viagem não encontrado' });
         }
 
-        res.json(package);
+        res.redirect('/packages'); 
+
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 };
+
 
 exports.deletePackage = async (req, res) => {
     try {

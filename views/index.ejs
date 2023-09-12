@@ -30,7 +30,8 @@
                 <p class="text-gray-500">Data de Saída: <%= package.dataSaida %></p>
                 <p class="text-gray-500">Data de Retorno: <%= package.dataChegada %></p>
                 <p class="text-gray-700 mt-2"><%= package.descricao %></p>
-                <button type="button" id="editButton" class="bg-blue-500 text-white py-2 px-4 rounded-md">Editar</button>
+                <a href="/packages/<%= package._id %>/edit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Editar</a>
+
                 <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-md" onclick="deletePackage('<%= package._id %>')" data-id="<%= package._id %>">Excluir</button>
 
 

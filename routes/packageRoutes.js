@@ -12,7 +12,6 @@ router.get('/packages/:id/edit', packageController.editPackage);
 
 router.put('/packages/:id', packageController.updatePackage);
 
-
 router.delete('/packages/:id', packageController.deletePackage);
 
 
