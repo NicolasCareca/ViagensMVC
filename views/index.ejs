@@ -1,0 +1,67 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Listar Pacotes de Viagem</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-700">
+    <header class="bg-blue-500">
+      <div class="container mx-auto p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-semibold mb-4 ">Pacotes de Viagem</h1>
+        
+        <nav>
+          <a href="/packagesCreate" class="text-black mr-8">Adicionar pacote</a>
+        </nav>
+      </div>
+    </header>
+    
+    
+    <div class="flex justify-center items-center min-h-screen">
+      <div class="container mx-auto p-4">
+       
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <% packages.forEach((package) => { %>
+            <% if (package.destino && package.valor && package.dataSaida && package.dataChegada && package.descricao) { %>
+              <li class="bg-white shadow-lg p-4 rounded-lg h-[400px]">
+                <img src="<%= package.imagens[0] %>" alt="<%= package.destino %>" class="mb-4 max-w-full">
+                <h2 class="text-lg font-semibold"><%= package.destino %></h2>
+                <p class="text-gray-500">Valor: R$ <%= package.valor %></p>
+                <p class="text-gray-500">Data de Saída: <%= package.dataSaida %></p>
+                <p class="text-gray-500">Data de Retorno: <%= package.dataChegada %></p>
+                <p class="text-gray-700 mt-2"><%= package.descricao %></p>
+                <button type="button" id="editButton" class="bg-blue-500 text-white py-2 px-4 rounded-md">Editar</button>
+                <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-md" onclick="deletePackage('<%= package._id %>')" data-id="<%= package._id %>">Excluir</button>
+
+
+              </li>
+            <% } %>
+          <% }); %>
+          
+          
+        </ul>
+      </div>
+    </div>
+  </body> 
+
+  
+   <script>
+function deletePackage(packageId) {
+  const confirmation = confirm('Tem certeza que deseja excluir este pacote?');
+
+  if (confirmation) {
+    fetch(`/packages/${packageId}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        location.reload(); 
+      })
+      .catch(error => console.error('Erro ao excluir pacote:', error));
+  }
+}
+  </script>
+
+
+  </html>

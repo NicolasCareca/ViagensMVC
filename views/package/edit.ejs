@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Pacote de Viagem</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-semibold mb-4">Editar Pacote de Viagem</h1>
+    <form action="/packages/<%= package._id %>?_method=PUT" method="POST" class="bg-white shadow-lg rounded-lg p-4">
+      <div class="mb-4">
+        <label for="destino" class="block text-gray-700 font-semibold">Destino:</label>
+        <input type="text" id="destino" name="destino" class="w-full p-2 border rounded-md" value="<%= package.destino %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="valor" class="block text-gray-700 font-semibold">Valor:</label>
+        <input type="number" id="valor" name="valor" class="w-full p-2 border rounded-md" value="<%= package.valor %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="dataSaida" class="block text-gray-700 font-semibold">Data de Saída:</label>
+        <input type="date" id="dataSaida" name="dataSaida" class="w-full p-2 border rounded-md" value="<%= package.dataSaida.toISOString().split('T')[0] %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="dataChegada" class="block text-gray-700 font-semibold">Data de Chegada:</label>
+        <input type="date" id="dataChegada" name="dataChegada" class="w-full p-2 border rounded-md" value="<%= package.dataChegada.toISOString().split('T')[0] %>" required>
+      </div>
+      <div class="mb-4">
+        <label for="descricao" class="block text-gray-700 font-semibold">Descrição:</label>
+        <textarea id="descricao" name="descricao" class="w-full p-2 border rounded-md" required><%= package.descricao %></textarea>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Atualizar Pacote</button>
+    </form>
+  </div>
+</body>
+</html>

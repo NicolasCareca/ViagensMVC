@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Pacote de Viagem</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-700">
+  <div class="flex justify-center items-center h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-4">
+      <h1 class="text-2xl font-semibold mb-4">Criar Pacote de Viagem</h1>
+      <form action="/packagesCreate" method="POST" id="create-package-form">
+        <div class="mb-4">
+          <label for="destino" class="block text-gray-700 font-semibold">Destino:</label>
+          <input type="text" id="destino" name="destino" class="w-full p-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label for="valor" class="block text-gray-700 font-semibold">Valor:</label>
+          <input type="number" id="valor" name="valor" class="w-full p-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label for="dataSaida" class="block text-gray-700 font-semibold">Data de Saída:</label>
+          <input type="date" id="dataSaida" name="dataSaida" class="w-full p-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label for="dataChegada" class="block text-gray-700 font-semibold">Data de Chegada:</label>
+          <input type="date" id="dataChegada" name="dataChegada" class="w-full p-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label for="descricao" class="block text-gray-700 font-semibold">Descrição:</label>
+          <textarea id="descricao" name="descricao" class="w-full p-2 border rounded-md" required></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="imagem" class="block text-gray-700 font-semibold">Imagem:</label>
+          <input type="file" id="imagem" name="imagem" class="w-full p-2 border rounded-md" accept="image/*" required>
+          <img id="imagem-preview" class="hidden w-full h-auto mt-2 max-w-[200px] max-h-[200px]"
+            alt="Preview da imagem" />
+        </div>
+        <button type="submit" id="submit-button" class="bg-blue-500 text-white py-2 px-4 rounded-md w-full mb-2">Criar
+          Pacote</button>
+        <button type="button" id="button"
+          class="bg-red-500 text-white py-2 px-4 rounded-md w-full mt-2">voltar</button>
+
+      </form>
+    </div>
+  </div>
+</body>
+
+<script>
+  const createPackageForm = document.getElementById('create-package-form');
+  const button = document.getElementById('button'); // Seleciona o botão de avançar
+
+  button.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log("Botão avançar clicado"); // Verifique se esta mensagem aparece no console
+    window.location.href = '/packages';
+  });
+
+  const imagemInput = document.getElementById('imagem');
+  const imagemPreview = document.getElementById('imagem-preview');
+  const submitButton = document.getElementById('submit-button');
+
+  function disableSubmitButton() {
+    submitButton.disabled = true;
+  }
+
+  imagemInput.addEventListener('change', function () {
+    if (imagemInput.files && imagemInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        imagemPreview.src = e.target.result;
+        imagemPreview.classList.remove('hidden');
+      };
+
+      reader.readAsDataURL(imagemInput.files[0]);
+    } else {
+      imagemPreview.src = '';
+      imagemPreview.classList.add('hidden');
+    }
+  });
+</script>
+
+</html>
